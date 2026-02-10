@@ -1,0 +1,11 @@
+- id: <package id>
+  name: <package name>
+  version: <version>
+  date: <date>
+  requires:
+  - <ids of packages required by this package (optional)>
+  - ...
+  path: <path to package zip file>
+  sha256: <sha256 of zip>
+  metadata:
+    <optional key/value pairs for extra information>
