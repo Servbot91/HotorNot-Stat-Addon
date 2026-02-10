@@ -1,0 +1,8 @@
+name: Hot or Not Match History Add-on
+description: Formats Hot or Not Match history info and adds streaks.
+version: 1.0
+ui:
+  css:
+    - hotstatcs.css
+  javascript:
+    - HotorNotStatsDisplay.js

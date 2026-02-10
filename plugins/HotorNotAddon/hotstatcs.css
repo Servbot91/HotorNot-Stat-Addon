@@ -1,0 +1,102 @@
+/* Hot or Not stats layout */
+.hotornot_stats .stats-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 14px;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  align-items: center;
+}
+
+/* Labels */
+.hotornot_stats .stats-key {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa4b2 !important;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Values */
+.hotornot_stats .stats-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb !important;
+}
+
+.hotornot_stats .stats-key:contains("Win"),
+.hotornot_stats .stats-value {
+  color: #22c55e !important;
+}
+
+.hotornot_stats .stats-value.stat-positive {
+  color: #22c55e !important; /* green */
+}
+
+.hotornot_stats .stats-value.stat-negative {
+  color: #ef4444 !important; /* red */
+}
+
+.hotornot_stats .stats-grid {
+  display: flex;           /* switch from grid to flex */
+  flex-direction: row;     /* horizontal layout */
+  gap: 24px;               /* space between each stat */
+  flex-wrap: nowrap;       /* keep all in one row, no wrapping */
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+.hotornot_stats .stat-item {
+  display: flex;
+  flex-direction: row;     /* label + value side by side */
+  gap: 4px;                /* space between label and value */
+  align-items: center;     /* vertically center label & value */
+}
+
+.hotornot_stats .stats-key {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa4b2 !important;
+}
+
+.hotornot_stats .stats-value {
+  max-width: 180px;        /* adjust as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile: single column */
+@media (max-width: 768px) {
+  .hotornot_stats .stats-grid {
+    flex-direction: column;   /* stack stats vertically */
+    gap: 12px;                /* space between each stat */
+  }
+
+  .hotornot_stats .stat-item {
+    width: 100%;              /* full width for each stat */
+  }
+
+  .hotornot_stats .stats-value {
+    max-width: 100%;          /* let value use full width */
+    white-space: normal;      /* allow wrapping */
+    word-break: break-word;
+  }
+}
+
+.hotornot_stats .stats-value.stat-positive {
+  color: #22c55e !important; /* green */
+}
+
+.hotornot_stats .stats-value.stat-negative {
+  color: #ef4444 !important; /* red */
+}
+
+/* Default Chevron points down */
+.collapse-button svg {
+  transition: transform 0.3s ease;
+}
+
+/* Rotate when expanded */
+.collapse.show + .collapse-button svg,
+.collapse-button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
