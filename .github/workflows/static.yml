@@ -4,5 +4,5 @@
     description: Formats Hot or Not Match history info and adds streaks.
   version: 1.0
   date:
-  path: https://raw.githubusercontent.com/Servbot91/HotorNot-Stat-Addon/main/plugins/HotorNotAddon/plugin-config.yml
+  path: https://raw.githubusercontent.com/Servbot91/HotorNot-Stat-Addon/refs/heads/main/plugins/HotorNotAddon/HotStats.yml
   sha256: AB246A1DC985FB0466DC4A3A531282D821D9C60C4A3FD46A138FB781EFB317E8
