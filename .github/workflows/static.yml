@@ -4,5 +4,5 @@
     description: Formats Hot or Not Match history info and adds streaks.
   version: 1.0
   date:
-  path: HotorNot-Stat-Addon-main.zip
+  path: plugins/HotorNotAddon
   sha256: AB246A1DC985FB0466DC4A3A531282D821D9C60C4A3FD46A138FB781EFB317E8
