@@ -1,11 +1,8 @@
-- id: <package id>
-  name: <package name>
-  version: <version>
-  date: <date>
-  requires:
-  - <ids of packages required by this package (optional)>
-  - ...
-  path: <path to package zip file>
-  sha256: <sha256 of zip>
+- id: HotorNotStatsDisplay
+  name: HotorNot Match History
   metadata:
-    <optional key/value pairs for extra information>
+    description: Formats Hot or Not Match history info and adds streaks.
+  version: 1.0
+  date: 02-10-2026
+  path: HotorNot-Stat-Addon-main.zip
+  sha256: AB246A1DC985FB0466DC4A3A531282D821D9C60C4A3FD46A138FB781EFB317E8
