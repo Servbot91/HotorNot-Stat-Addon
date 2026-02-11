@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   build:
@@ -54,7 +53,7 @@ jobs:
       # ---------------------------------
       - name: Update version, date, and sha256
         run: |
-          FILE=".github/workflows/static.yml"
+          FILE="plugins/manifest.yml"
 
           sed -i "s/version:.*/version: 1.0${{ steps.commit.outputs.sha }}/" $FILE
           sed -i "s/date:.*/date: ${{ steps.commit.outputs.date }}/" $FILE
@@ -69,7 +68,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add plugins/HotorNotStats.zip
-          git add .github/workflows/static.yml
+          git add plugins/manifest.yml
 
           if git diff --staged --quiet; then
             echo "No changes to commit"
