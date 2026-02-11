@@ -1,6 +1,6 @@
 name: Hot or Not Match History Add-on
-description: Formats Hot or Not Match history info and adds streaks.
-version: 1.0
+description: Formats Hot or Not Match history info, adds badges, color formatting, mobile support, and integration for additional fields.
+version: 1.1
 ui:
   css:
     - hotstatcs.css
