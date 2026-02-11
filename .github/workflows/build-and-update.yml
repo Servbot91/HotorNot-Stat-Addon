@@ -57,9 +57,9 @@ jobs:
         run: |
           FILE="plugins/manifest.yml"
 
-          sed -i "s/version:.*/version: 1.0${{ steps.commit.outputs.sha }}/" $FILE
-          sed -i "s/date:.*/date: ${{ steps.commit.outputs.date }}/" $FILE
-          sed -i "s/sha256:.*/sha256: ${{ steps.hash.outputs.sha256 }}/" $FILE
+          sed -i "s|version:.*|version: 1.0${{ steps.commit.outputs.sha }}|" $FILE
+          sed -i "s|date:.*|date: ${{ steps.commit.outputs.date }}|" $FILE
+          sed -i "s|sha256:.*|sha256: ${{ steps.hash.outputs.sha256 }}|" $FILE
 
       # ---------------------------------
       # Commit changes
