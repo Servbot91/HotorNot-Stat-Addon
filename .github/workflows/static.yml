@@ -1,0 +1,8 @@
+- id: HotorNotStatsDisplay
+  name: HotorNot Match History
+  metadata:
+    description: Formats Hot or Not Match history info and adds streaks.
+  version: 1.0
+  date:
+  path: https://github.com/Servbot91/HotorNot-Stat-Addon/raw/refs/heads/main/plugins/HotorNotStats.zip
+  sha256: 12561abf549ac2d19f00f2b00f3dc62217c9e26b23fdbbb9c4e57f064332d98b
