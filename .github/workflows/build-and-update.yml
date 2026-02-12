@@ -52,7 +52,7 @@ jobs:
           echo "sha256=$HASH" >> $GITHUB_OUTPUT
 
       # ---------------------------------
-      # Update static.yml
+      # Update manifest.yml
       # ---------------------------------
       - name: Update version, date, and sha256
         run: |
