@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # ---------------------------------
+      # Checkout repository
+      # ---------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -27,23 +30,23 @@ jobs:
         id: commit
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
-          # Get commit timestamp in seconds
           COMMIT_TS=$(git log -1 --pretty=format:'%ct')
-          # Format as YYYY-MM-DD HH:MM:SS
           COMMIT_DATE=$(date -d @$COMMIT_TS +"%Y-%m-%d %H:%M:%S")
+
           echo "sha=$SHORT_SHA" >> $GITHUB_OUTPUT
           echo "date=$COMMIT_DATE" >> $GITHUB_OUTPUT
 
       # ---------------------------------
-      # Build zip directly into plugins/
+      # Build zip (contents only, no parent folder)
       # ---------------------------------
       - name: Build HotorNotStats.zip
         run: |
-          cd plugins
-          zip -r HotorNotStats.zip HotorNotAddon
+          rm -f plugins/HotorNotStats.zip
+          cd plugins/HotorNotAddon
+          zip -r ../HotorNotStats.zip . -x "*.git*" -x "*__MACOSX*"
 
       # ---------------------------------
-      # Calculate SHA256 of committed zip
+      # Calculate SHA256
       # ---------------------------------
       - name: Calculate SHA256
         id: hash
