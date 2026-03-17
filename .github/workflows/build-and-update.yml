@@ -37,13 +37,21 @@ jobs:
           echo "date=$COMMIT_DATE" >> $GITHUB_OUTPUT
 
       # ---------------------------------
-      # Build zip (contents only, no parent folder)
+      # Build zip (with hotornotstats folder)
       # ---------------------------------
       - name: Build HotorNotStats.zip
         run: |
           rm -f plugins/HotorNotStats.zip
-          cd plugins/HotorNotAddon
-          zip -r ../HotorNotStats.zip . -x "*.git*" -x "*__MACOSX*"
+          rm -rf plugins/tmp_build
+
+          mkdir -p plugins/tmp_build/hotornotstats
+          cp -r plugins/HotorNotAddon/* plugins/tmp_build/hotornotstats/
+
+          cd plugins/tmp_build
+          zip -r ../HotorNotStats.zip hotornotstats -x "*.git*" -x "*__MACOSX*"
+
+          cd ../..
+          rm -rf plugins/tmp_build
 
       # ---------------------------------
       # Calculate SHA256
