@@ -42,16 +42,8 @@ jobs:
       - name: Build HotorNotStats.zip
         run: |
           rm -f plugins/HotorNotStats.zip
-          rm -rf plugins/tmp_build
-
-          mkdir -p plugins/tmp_build/hotornotstats
-          cp -r plugins/HotorNotAddon/* plugins/tmp_build/hotornotstats/
-
-          cd plugins/tmp_build
-          zip -r ../HotorNotStats.zip hotornotstats -x "*.git*" -x "*__MACOSX*"
-
-          cd ../..
-          rm -rf plugins/tmp_build
+          cd plugins
+          zip -r HotorNotStats.zip HotorNotAddon -x "*.git*" -x "*__MACOSX*"
 
       # ---------------------------------
       # Calculate SHA256
