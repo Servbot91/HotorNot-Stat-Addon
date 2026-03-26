@@ -8,7 +8,7 @@ The Hot or not plugin for [Stash](https://stashapp.cc/)  uses an ELO-style ratin
 --- 
 # Features
 
-The Hot or Not plugin adds custom values to each performer detail page detailing total matches, last match, wins, losses, current streak, best streak and worst streak. This add-on formats the values in a more palatable structure, adds streaks, and color coding for wins\losses. Custom fields is also auto expanded so these values display on load. Supports mobile, and values are displayed as a single column/
+The Hot or Not plugin adds custom values to each performer detail page detailing total matches, last match, wins, losses, current streak, best streak and worst streak. This add-on formats the values in a more palatable structure, adds streaks, and color coding for wins\losses. Custom fields is also auto expanded so these values display on load. Supports mobile, and values are displayed as a single column.
 
 ## Streaks
 Streaks are marked by badges and are as follows:
@@ -28,6 +28,6 @@ The best streak field retains all of the highest obtained streaks. A streak of 1
 
 The performer ledger tracks the last 10 win\losses for a performer. The win\loss cards contain win\loss performer name, the value their rank updated to, color coded for win\loss, and a link to the performer profile.
 
-## Performer Ledger Reset Button
+## Performer Ledger Reset Task
 
 A reset task has been added for performer custom fields which will reset this ledger. (Alpha)
