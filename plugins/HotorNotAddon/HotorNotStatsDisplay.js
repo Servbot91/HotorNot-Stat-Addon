@@ -1,6 +1,6 @@
-// ===============================
+// =================================
 // Force Custom Fields Collapse Open
-// ===============================
+// =================================
 const collapseObserver = new MutationObserver(() => {
   const performerCustomFields = document.querySelector('#performer-page .custom-fields');
   if (!performerCustomFields) return;
@@ -133,9 +133,9 @@ statsObserver.observe(document.body, {
   subtree: true
 });
 
-// ===============================
+// ================================================
 // Performer Record (Match History Timeline) Parser
-// ===============================
+// ================================================
 const recordObserver = new MutationObserver(() => {
   document.querySelectorAll('.performer_record .TruncatedText').forEach(el => {
     if (el.dataset.parsed) return;
@@ -197,14 +197,12 @@ const recordObserver = new MutationObserver(() => {
 
 recordObserver.observe(document.body, { childList: true, subtree: true });
 
-recordObserver.observe(document.body, { childList: true, subtree: true });
-
 
 // ===============================
 // Styles
 // ===============================
-const style = document.createElement('style');
-style.textContent = `
+const hotOrNotStyles = document.createElement('style');
+hotOrNotStyles.textContent = `
 /* Match Timeline Styles */
 .match-timeline {
   display: grid;
@@ -337,4 +335,4 @@ style.textContent = `
   overflow: visible !important;
 }
 `;
-document.head.appendChild(style);
+document.head.appendChild(hotOrNotStyles);
