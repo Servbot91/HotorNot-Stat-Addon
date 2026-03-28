@@ -2,7 +2,7 @@
   name: HotorNot Match History
   metadata:
     description: Formats Hot or Not Match history info, adds streak badges, and future support for additional HotorNot fields.
-  version: 1.0b53e2f7
-  date: 2026-03-19 20:20:20
+  version: 1.036049bc
+  date: 2026-03-28 15:19:33
   path: https://github.com/Servbot91/HotorNot-Stat-Addon/raw/refs/heads/main/plugins/HotorNotStats.zip
-  sha256: 223657ccded3cacba69ac9da6b16ecad142698c27ef98cdd9a3e38f656285c93
+  sha256: ccbfe20564022f5cf3497a2c70ace1d8fafc852eb0e79ebc90eab11704e6e513
