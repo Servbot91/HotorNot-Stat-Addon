@@ -31,24 +31,23 @@ collapseObserver.observe(document.body, {
 // HotOrNot Stats Parser
 // ===============================
 const statsObserver = new MutationObserver(() => {
-  document.querySelectorAll('.hotornot_stats .TruncatedText').forEach(el => {
+  document.querySelectorAll('.custom-field-hotornot_stats .TruncatedText').forEach(el => {
     if (el.dataset.parsed) return;
 
     try {
       const rawText = el.textContent.trim();
-      if (!rawText.startsWith('{')) return; // prevent invalid JSON errors
+      if (!rawText.startsWith('{')) return;
 
       const data = JSON.parse(rawText);
 
-      const container = el.closest('.hotornot_stats');
+      const container = el.closest('.custom-field-hotornot_stats');
       if (!container) return;
 
-      // Rename section title
-      const titleSpan = container.querySelector('.detail-item-title.hotornot-stats');
+      const titleSpan = container.querySelector('.detail-item-title.custom-field-hotornot-stats');
       if (titleSpan) {
         titleSpan.textContent = 'Match History';
       }
-
+	  
       const grid = document.createElement('div');
       grid.className = 'stats-grid';
 
@@ -137,17 +136,17 @@ statsObserver.observe(document.body, {
 // Performer Record (Match History Timeline) Parser
 // ================================================
 const recordObserver = new MutationObserver(() => {
-  document.querySelectorAll('.performer_record .TruncatedText').forEach(el => {
+  document.querySelectorAll('.custom-field-performer_record .TruncatedText').forEach(el => {
     if (el.dataset.parsed) return;
 
     try {
       const rawText = el.textContent.trim();
-      if (!rawText.startsWith('[')) return; 
+      if (!rawText.startsWith('[')) return;
 
       const history = JSON.parse(rawText);
-      const container = el.closest('.performer_record');
-      
-      const titleSpan = container?.querySelector('.detail-item-title');
+      const container = el.closest('.custom-field-performer_record');
+
+      const titleSpan = container?.querySelector('.detail-item-title.custom-field-performer-record');
       if (titleSpan) titleSpan.textContent = 'Past Matchups';
 
       const timeline = document.createElement('div');
@@ -198,141 +197,3 @@ const recordObserver = new MutationObserver(() => {
 recordObserver.observe(document.body, { childList: true, subtree: true });
 
 
-// ===============================
-// Styles
-// ===============================
-const hotOrNotStyles = document.createElement('style');
-hotOrNotStyles.textContent = `
-/* Match Timeline Styles */
-.match-timeline {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); 
-  gap: 6px;
-  padding: 8px 0;
-  width: 535% !important; 
-  font-family: sans-serif;
-}
-
-.timeline-entry {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important; 
-  padding: 3px 8px !important;               
-  background: rgba(255,255,255,0.05) !important;
-  border-radius: 4px !important;
-  font-size: 1rem !important;             
-  min-height: 40px !important;              
-  border-left: 3px solid transparent !important;
-}
-
-/* Win: Greenish theme */
-.timeline-entry.win {
-  border-left: 3px solid #4caf50 !important;
-  background: rgba(76, 175, 80, 0.1) !important;
-}
-.timeline-entry.win .timeline-status {
-  color: #4caf50 !important;
-  font-weight: bold !important;
-}
-.timeline-entry.win .timeline-marker {
-  color: #4caf50 !important;
-}
-
-/* Loss: Reddish theme */
-.timeline-entry.loss {
-  border-left: 3px solid #f44336 !important;
-  background: rgba(244, 67, 54, 0.1) !important;
-}
-.timeline-entry.loss .timeline-status {
-  color: #f44336 !important;
-  font-weight: bold !important;
-}
-.timeline-entry.loss .timeline-marker {
-  color: #f44336 !important;
-}
-
-/* Draw/Neutral: Gray theme */
-.timeline-entry.draw {
-  border-left: 3px solid #9e9e9e !important;
-  background: rgba(158, 158, 158, 0.1) !important;
-}
-.timeline-entry.draw .timeline-status {
-  color: #9e9e9e !important;
-}
-
-.timeline-content {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 6px !important;
-  flex-grow: 1 !important;
-  height: 100% !important;
-}
-
-/* Ensure ALL elements are vertically centered */
-.timeline-date,
-.timeline-marker,
-.timeline-status,
-.timeline-vs,
-.timeline-opponent-link,
-.timeline-rating {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 100% !important;
-}
-
-.timeline-status {
-  font-weight: bold !important;
-  font-size: 0.7rem !important;
-}
-
-.timeline-vs {
-  font-size: 0.9rem !important;
-}
-
-.timeline-opponent-link {
-  color: #00b2ff !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
-}
-
-.timeline-date {
-  font-size: 0.65rem !important;
-  opacity: 0.5 !important;
-  margin-right: 4px !important;
-}
-
-.timeline-rating { 
-  font-weight: bold !important; 
-  color: #00b2ff !important; 
-  background: rgba(0,178,255,0.12) !important; 
-  padding: 1px 4px !important; 
-  border-radius: 3px !important; 
-  font-size: 0.7rem !important;
-  margin-left: 4px !important;
-  min-width: 35px !important;
-  text-align: center !important;
-}
-
-/* Responsive Breakpoints */
-@media (max-width: 1200px) {
-  .match-timeline { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 800px) {
-  .match-timeline { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 500px) {
-  .match-timeline { grid-template-columns: 1fr; }
-}
-
-.performer_record, .performer_record .TruncatedText {
-  max-width: 100% !important;
-  width: 100% !important;
-  display: block !important;
-  overflow: visible !important;
-}
-`;
-document.head.appendChild(hotOrNotStyles);
