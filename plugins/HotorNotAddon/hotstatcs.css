@@ -257,3 +257,196 @@
 @media (max-width: 500px) {
   .match-timeline { grid-template-columns: 1fr; }
 }
+
+/* Stash version .30 backwards compatibility */
+
+/* Hot or Not stats layout */
+
+/* Labels */
+.hotornot_stats .stats-key {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa4b2 !important;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Values */
+.hotornot_stats .stats-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb !important;
+}
+
+.hotornot_stats .stats-key:contains("Win"),
+.hotornot_stats .stats-value {
+  color: #22c55e !important;
+}
+
+.hotornot_stats .stats-value.stat-positive {
+  color: #22c55e !important; /* green */
+}
+
+.hotornot_stats .stats-value.stat-negative {
+  color: #ef4444 !important; /* red */
+}
+
+.hotornot_stats .stats-grid {
+  display: flex;           /* switch from grid to flex */
+  flex-direction: row;     /* horizontal layout */
+  gap: 6px;               /* space between each stat */
+  flex-wrap: nowrap;       /* keep all in one row, no wrapping */
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+.hotornot_stats .stat-item {
+  display: flex;
+  flex-direction: row;     /* label + value side by side */
+  gap: 7px;                /* space between label and value */
+  align-items: center;     /* vertically center label & value */
+}
+
+.hotornot_stats .stats-key {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9aa4b2 !important;
+}
+
+.hotornot_stats .stats-value {
+  max-width: 180px;        /* adjust as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile: single column */
+@media (max-width: 768px) {
+  .hotornot_stats .stats-grid {
+    flex-direction: column;   /* stack stats vertically */
+    gap: 12px;                /* space between each stat */
+  }
+
+  .hotornot_stats .stat-item {
+    width: 100%;              /* full width for each stat */
+  }
+
+  .hotornot_stats .stats-value {
+    max-width: 100%;          /* let value use full width */
+    white-space: normal;      /* allow wrapping */
+    word-break: break-word;
+  }
+}
+
+.hotornot_stats .stats-value.stat-positive {
+  color: #22c55e !important; /* green */
+}
+
+.hotornot_stats .stats-value.stat-negative {
+  color: #ef4444 !important; /* red */
+}
+
+/* Default Chevron points down */
+.collapse-button svg {
+  transition: transform 0.3s ease;
+}
+
+/* Added support for the manual class toggle in your JS */
+.collapse-button svg.rotated,
+.collapse.show + .collapse-button svg {
+  transform: rotate(180deg);
+}
+
+/* Stats Grid Layout */
+
+  .stat-item {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .stats-key {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .stats-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Stat Coloring */
+  .stat-positive { color: #4caf50 !important; }
+  .stat-negative { color: #f44336 !important; }
+  
+  
+
+/* --- Recent Matches Colors --- */
+
+/* Win: Greenish theme */
+.timeline-entry.win {
+  border-left: 3px solid #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+}
+.timeline-entry.win .timeline-status {
+  color: #4caf50;
+  font-weight: bold;
+}
+.timeline-entry.win .timeline-marker {
+  color: #4caf50;
+}
+
+/* Loss: Reddish theme */
+.timeline-entry.loss {
+  border-left: 3px solid #f44336;
+  background: rgba(244, 67, 54, 0.1);
+}
+.timeline-entry.loss .timeline-status {
+  color: #f44336;
+  font-weight: bold;
+}
+.timeline-entry.loss .timeline-marker {
+  color: #f44336;
+}
+
+/* Draw/Neutral: Gray theme */
+.timeline-entry.draw {
+  border-left: 3px solid #9e9e9e;
+  background: rgba(158, 158, 158, 0.1);
+}
+.timeline-entry.draw .timeline-status {
+  color: #9e9e9e;
+}
+
+
+/* Rating badges that match the status */
+.timeline-entry.win .timeline-rating {
+  color: #4caf50 !important;
+  background: rgba(76, 175, 80, 0.15) !important;
+}
+
+.timeline-entry.loss .timeline-rating {
+  color: #f44336 !important;
+  background: rgba(244, 67, 54, 0.15) !important;
+}
+
+.timeline-entry.draw .timeline-rating {
+  color: #9e9e9e !important;
+  background: rgba(158, 158, 158, 0.15) !important;
+}
+
+.timeline-rating { 
+  font-weight: bold; 
+  color: #00b2ff; 
+  background: rgba(0,178,255,0.15); 
+  padding: 2px 6px; 
+  border-radius: 4px; 
+  font-size: 0.8rem;
+  min-width: 35px;
+  text-align: center;
+  margin-left: auto; /* Pushes rating to the far right of the entry */
+  margin-right: 4px;
+}
