@@ -139,7 +139,7 @@
   grid-template-columns: repeat(5, 1fr); 
   gap: 6px;
   padding: 8px 0;
-  width: 735% !important; 
+  width: 535% !important; 
   font-family: sans-serif;
 }
 
