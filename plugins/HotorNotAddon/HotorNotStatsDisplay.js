@@ -1,4 +1,58 @@
 // =================================
+// Tier Info
+// =================================
+function formatScore(score) {
+  return (score / 10).toFixed(1);
+}
+
+function getRatingTier(rating) {
+  // Convert integer rating to actual rating value
+  const actualRating = rating / 10;
+  if (actualRating >= 8.5) return 'S-Tier';
+  if (actualRating >= 7.0) return 'A-Tier';
+  if (actualRating >= 5.5) return 'B-Tier';
+  if (actualRating >= 4.0) return 'C-Tier';
+  if (actualRating >= 2.5) return 'D-Tier';
+  return 'F-Tier';
+}
+
+function getTierChangeIndicator(ratingBefore, ratingAfter) {
+  const tierBefore = getRatingTier(ratingBefore);
+  const tierAfter = getRatingTier(ratingAfter);
+  
+  if (tierAfter === tierBefore) return '';
+  
+  const tierColor = getTierColor(tierAfter);
+  const arrow = getTierLevel(tierAfter) > getTierLevel(tierBefore) ? '⬆️' : '⬇️';
+  
+  return ` <span style="color: ${tierColor}; font-weight: bold; font-size: 0.8em;">${arrow}${tierAfter.charAt(0)}</span>`;
+}
+
+function getTierLevel(tier) {
+  switch(tier) {
+    case 'S-Tier': return 6;
+    case 'A-Tier': return 5;
+    case 'B-Tier': return 4;
+    case 'C-Tier': return 3;
+    case 'D-Tier': return 2;
+    case 'F-Tier': return 1;
+    default: return 0;
+  }
+}
+
+function getTierColor(tier) {
+  switch (tier) {
+    case 'S-Tier': return '#eb9834'; // Gold
+    case 'A-Tier': return '#e014aa'; // Pink
+    case 'B-Tier': return '#7f1e82'; // Purple
+    case 'C-Tier': return '#14bbe0'; // Light blue
+    case 'D-Tier': return '#92e014'; // Lime Green
+    case 'F-Tier': return '#808080'; // Gray
+    default: return '#000000';
+  }
+}
+
+// =================================
 // Force Custom Fields Collapse Open
 // =================================
 const collapseObserver = new MutationObserver(() => {
@@ -72,17 +126,21 @@ function buildStatsGrid(data) {
       .replace(/_/g, ' ')
       .replace(/\b\w/g, c => c.toUpperCase());
 
-    const displayValue =
-      key === 'last_match'
-        ? new Date(value).toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true
-          })
-        : value;
+    let displayValue = value;
+    
+    // Format rating values with decimals
+    if (key.toLowerCase().includes('rating') || key === 'current_score') {
+      displayValue = formatScore(value);
+    } else if (key === 'last_match') {
+      displayValue = new Date(value).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
 
     let emoji = '';
     if (key.toLowerCase() === 'current_streak') {
@@ -225,7 +283,10 @@ function buildTimeline(history) {
   const timeline = document.createElement('div');
   timeline.className = 'match-timeline';
 
-  history.reverse().slice(0, 10).forEach(match => {
+  // Process matches in reverse chronological order (newest first)
+  const sortedHistory = [...history].reverse();
+  
+  sortedHistory.slice(0, 10).forEach((match, index) => {
     const date = new Date(match.date).toLocaleDateString(undefined, {
       month: 'short', day: 'numeric'
     });
@@ -238,7 +299,23 @@ function buildTimeline(history) {
       ? match.opponent.split(':')
       : [null, match.opponent];
 
+    // Truncate long performer names
+    const maxNameLength = 15;
+    const truncatedName = oppName.length > maxNameLength 
+      ? oppName.substring(0, maxNameLength) + '...' 
+      : oppName;
+
     const profileUrl = oppId ? `/performers/${oppId}/scenes` : '#';
+    
+    // Get the previous match to calculate rating change
+    let tierIndicator = '';
+    if (index < sortedHistory.length - 1) {
+      const previousMatch = sortedHistory[index + 1];
+      tierIndicator = getTierChangeIndicator(previousMatch.ratingAfter, match.ratingAfter);
+    }
+    
+    // Format rating with decimal
+    const formattedRating = formatScore(match.ratingAfter);
 
     timeline.insertAdjacentHTML('beforeend', `
       <div class="timeline-entry ${statusClass}">
@@ -247,17 +324,40 @@ function buildTimeline(history) {
         <div class="timeline-content">
           <span class="timeline-status">${statusText}</span>
           <span class="timeline-vs">vs</span> 
-          <a href="${profileUrl}" class="timeline-opponent-link" style="color: #00b2ff; text-decoration: none;">
-            ${oppName}
+          <a href="${profileUrl}" class="timeline-opponent-link" style="color: #00b2ff; text-decoration: none;" title="${oppName}">
+            ${truncatedName}
           </a>
         </div>
-        <span class="timeline-rating">${match.ratingAfter}</span>
+        <div class="rating-tier-container">
+          <span class="timeline-rating">${formattedRating}</span>
+          <span class="tier-indicator">${tierIndicator}</span>
+        </div>
       </div>
     `);
   });
 
   return timeline;
 }
+
+// Add CSS for the new layout
+const style = document.createElement('style');
+style.textContent = `
+  .rating-tier-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .timeline-rating {
+    font-weight: bold;
+  }
+  
+  .tier-indicator {
+    font-size: 0.8em;
+  }
+`;
+document.head.appendChild(style);
 
 recordObserverNew.observe(document.body, { childList: true, subtree: true });
 recordObserverOld.observe(document.body, { childList: true, subtree: true });
