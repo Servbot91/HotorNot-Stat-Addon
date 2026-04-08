@@ -478,15 +478,15 @@
   color: #00b2ff !important;
   text-decoration: none !important;
   white-space: nowrap !important;
-  font-size: 0.95rem !important; 
+  font-size: 0.95rem !important; /* Increased from default */
 }
 
 @media (max-width: 767px) {
   .timeline-opponent-link {
-    white-space: normal !important;    
-    word-break: break-word !important; 
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;        
-    text-overflow: clip !important;    
+    white-space: normal !important;     /* Allow text to wrap */
+    word-break: break-word !important; /* Break long words if needed */
+    overflow-wrap: break-word !important;/* Handle overflow gracefully */
+    max-width: 100% !important;        /* Use full width if needed */
+    text-overflow: clip !important;    /* Disable ellipsis if causing cutoff */
   }
 }
